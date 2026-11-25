@@ -98,17 +98,6 @@ export default function Login() {
                   {busy ? 'Signing in…' : 'Sign In'}
                 </button>
               </div>
-              <div className="login-links">
-                <button type="button" className="login-link" onClick={() => { setMode('forgot'); setError(''); setInfo(''); }}>
-                  <svg className="login-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <circle cx="7.5" cy="15.5" r="4.5" />
-                    <path d="m10.7 12.3 8.8-8.8" />
-                    <path d="m17 6 2 2" />
-                    <path d="m14 9 2 2" />
-                  </svg>
-                  Forgot password?
-                </button>
-              </div>
             </form>
           ) : (
             <form onSubmit={resetToken ? submitReset : submitForgot}>
