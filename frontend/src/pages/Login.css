@@ -54,3 +54,32 @@
   min-width: 110px;
   height: 34px;
 }
+.login-info {
+  background: #f0f9ff;
+  border: 1px solid var(--blue);
+  color: var(--blue-dark);
+  font-size: 12px;
+  padding: 8px 10px;
+  border-radius: 3px;
+  margin-bottom: 14px;
+}
+
+.login-links {
+  margin-top: 14px;
+  text-align: right;
+}
+
+.login-link {
+  background: none;
+  border: 0;
+  color: var(--blue-dark);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+.login-link:hover {
+  color: var(--blue);
+}
