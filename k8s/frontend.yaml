@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: frontend
-          image: salesorder-frontend:v21
+          image: salesorder-frontend:v22
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 80

@@ -32,17 +32,29 @@ const qs = (params) => {
 
 export const api = {
   login: async (username, password) => {
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ username, password }),
-    });
-    if (!res.ok) {
-      let body = {};
-      try { body = await res.json(); } catch { /* no body */ }
-      throw new Error(body.message || `Login failed (${res.status})`);
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 15000);
+    try {
+      const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password }),
+        signal: controller.signal,
+      });
+      if (!res.ok) {
+        let body = {};
+        try { body = await res.json(); } catch { /* no body */ }
+        throw new Error(body.message || `Login failed (${res.status})`);
+      }
+      return res.json();
+    } catch (err) {
+      if (err.name === 'AbortError') {
+        throw new Error('Login timed out. The server did not respond. Please try again.');
+      }
+      throw err;
+    } finally {
+      clearTimeout(timer);
     }
-    return res.json();
   },
   logout: () => request('/auth/logout', { method: 'POST' }),
   forgotPassword: (username) => request('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ username }) }),
