@@ -1,0 +1,268 @@
+/* ========================================
+   NAVIGATION HEADER STYLES
+   React Component - Spring Boot Thymeleaf Compatible
+   ======================================== */
+
+:root {
+    --nav-bg: #00AEEF;
+    --nav-bg-active: #008CBA;
+    --nav-text: #FFFFFF;
+    --dropdown-bg: #00AEEF;
+    --dropdown-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    --dropdown-border: rgba(255, 255, 255, 0.1);
+}
+
+/* ===== TOP NAVIGATION HEADER ===== */
+.top-nav {
+    background-color: var(--nav-bg);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.nav-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+}
+
+.brand {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0.3px;
+    color: var(--nav-text);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-menu {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    height: 60px;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-item {
+    position: relative;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    color: var(--nav-text);
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 15px 20px;
+    height: 60px;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
+.nav-link:hover,
+.nav-item:hover > .nav-link,
+.nav-link.active {
+    background-color: var(--nav-bg-active);
+}
+
+.nav-link.active {
+    background-color: var(--nav-bg-active);
+}
+
+/* Dropdown Arrow */
+.dropdown-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 6px;
+    font-size: 10px;
+    transition: transform 0.2s ease;
+    line-height: 1;
+}
+
+.dropdown-arrow.open {
+    transform: rotate(180deg);
+}
+
+.nav-item:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* Dropdown Submenu */
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 180px;
+    background-color: var(--dropdown-bg);
+    box-shadow: var(--dropdown-shadow);
+    border-radius: 0 0 4px 4px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, visibility 0.2s ease, transform 0.2s ease;
+    z-index: 1001;
+}
+
+.nav-item:hover .dropdown-menu,
+.dropdown-menu.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    border-bottom: 1px solid var(--dropdown-border);
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.dropdown-link {
+    display: block;
+    color: var(--nav-text);
+    font-weight: 500;
+    font-size: 13px;
+    text-decoration: none;
+    padding: 8px 16px;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.dropdown-link:hover,
+.dropdown-link:focus {
+    background-color: var(--nav-bg-active);
+    outline: none;
+}
+
+/* Screen reader only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .nav-header {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 0;
+        gap: 10px;
+    }
+
+    .brand {
+        font-size: 18px;
+        order: 1;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-menu {
+        flex-wrap: wrap;
+        height: auto;
+        padding: 10px 0;
+        order: 2;
+        width: 100%;
+    }
+
+    .nav-link {
+        padding: 12px 16px;
+        height: auto;
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: #0095D6;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        display: none;
+        min-width: 100%;
+        border-top: 1px solid var(--dropdown-border);
+    }
+
+    .dropdown-menu.open {
+        display: block;
+    }
+
+    .nav-item:hover .dropdown-menu {
+        display: none;
+    }
+}
+
+/* ===== THYMELEAF INTEGRATION NOTES ===== */
+/*
+To use with Spring Boot Thymeleaf instead of React:
+
+1. Create fragments/header.html:
+   <header th:fragment="header" class="top-nav" role="navigation" aria-label="Main navigation">
+     <div class="nav-container">
+       <nav>
+         <ul class="nav-menu">
+           <li class="nav-item" th:classappend="${#request.requestURI.startsWith('/domestic-orders')} ? 'active' : ''">
+             <a th:href="@{/domestic-orders}" class="nav-link">
+               DOMESTIC ORDERS <span class="dropdown-arrow" aria-hidden="true">▼</span>
+             </a>
+             <ul class="dropdown-menu" role="menu">
+               <li class="dropdown-item" role="none"><a th:href="@{/domestic-orders/list}" class="dropdown-link" role="menuitem">DOMESTIC ORDERS LIST</a></li>
+               <li class="dropdown-item" role="none"><a th:href="@{/domestic-orders/new}" class="dropdown-link" role="menuitem">NEW DOMESTIC ORDER</a></li>
+             </ul>
+           </li>
+           <li class="nav-item" th:classappend="${#request.requestURI.startsWith('/purchase')} ? 'active' : ''">
+             <a th:href="@{/purchase}" class="nav-link">
+               PURCHASE <span class="dropdown-arrow" aria-hidden="true">▼</span>
+             </a>
+             <ul class="dropdown-menu" role="menu">
+               <li class="dropdown-item" role="none"><a th:href="@{/purchase/orders}" class="dropdown-link" role="menuitem">PURCHASE ORDERS</a></li>
+               <li class="dropdown-item" role="none"><a th:href="@{/purchase/new}" class="dropdown-link" role="menuitem">NEW PURCHASE ORDER</a></li>
+             </ul>
+           </li>
+           <li class="nav-item" th:classappend="${#request.requestURI.startsWith('/reports')} ? 'active' : ''">
+             <a th:href="@{/reports}" class="nav-link" role="menuitem">REPORTS</a>
+           </li>
+         </ul>
+       </nav>
+     </div>
+   </header>
+
+2. Create fragments/floating-btn.html:
+   <button th:fragment="floatingAddBtn" class="floating-add-btn" 
+           th:onclick="'window.location.href=' + @{/domestic-orders/new}"
+           aria-label="Add new record" title="Add New">
+     <span aria-hidden="true">+</span>
+     <span class="sr-only">Add New</span>
+   </button>
+
+3. Include in layout:
+   <div th:replace="~{fragments/header :: header}"></div>
+   <div th:replace="~{fragments/floating-btn :: floatingAddBtn}"></div>
+*/

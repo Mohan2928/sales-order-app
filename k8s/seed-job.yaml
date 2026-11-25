@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: salesorder-seed
+  namespace: salesorder
+spec:
+  backoffLimit: 10
+  template:
+    metadata:
+      labels:
+        app: salesorder-seed
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: seed
+          image: salesorder-backend:v2
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: APP_SEED_MODE
+              value: once
+            - name: SPRING_PROFILES_ACTIVE
+              value: postgres
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://postgres:5432/salesdb
+            - name: SPRING_DATASOURCE_USERNAME
+              value: salesapp
+            - name: SPRING_DATASOURCE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: salesorder-secret
+                  key: DB_PASSWORD

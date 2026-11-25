@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16
+    container_name: salesorder-db
+    environment:
+      POSTGRES_DB: salesdb
+      POSTGRES_USER: salesapp
+      POSTGRES_PASSWORD: "Mohan@123"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U salesapp -d salesdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build: ./backend
+    container_name: salesorder-backend
+    environment:
+      SPRING_PROFILES_ACTIVE: postgres
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/salesdb
+      SPRING_DATASOURCE_USERNAME: salesapp
+      SPRING_DATASOURCE_PASSWORD: "Mohan@123"
+    ports:
+      - "18085:8085"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build: ./frontend
+    container_name: salesorder-frontend
+    ports:
+      - "5175:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
