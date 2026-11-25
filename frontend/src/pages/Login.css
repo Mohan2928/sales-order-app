@@ -3,7 +3,7 @@
   display: grid;
   place-items: center;
   padding: 24px;
-  background: radial-gradient(1200px 800px at 50% 35%, #e7f4fb 0%, #f3f2f1 70%);
+  background: radial-gradient(1200px 800px at 50% 35%, #8ec6e4 0%, #f1c79d 70%);
 }
 
 .login-card {
