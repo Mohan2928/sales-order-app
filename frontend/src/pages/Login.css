@@ -8,39 +8,39 @@
 
 .login-card {
   width: 100%;
-  max-width: 440px;
+  max-width: 360px;
   background: #fff;
-  border: 2px solid var(--line);
-  border-radius: 6px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 8px 26px rgba(0, 0, 0, .12);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .10);
 }
 
 .login-head {
   background: var(--blue);
-  padding: 14px 22px;
+  padding: 10px 16px;
 }
 
 .login-brand {
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: .3px;
 }
 
 .login-body {
-  padding: 24px 22px 22px;
+  padding: 16px 16px 14px;
 }
 
 .login-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
   color: #1f2937;
   text-transform: uppercase;
   letter-spacing: .4px;
   border-bottom: 1px solid #d8d8d8;
   padding-bottom: 6px;
-  margin: 0 0 14px;
+  margin: 0 0 12px;
 }
 
 .login-card .field {
