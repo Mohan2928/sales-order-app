@@ -266,3 +266,29 @@ To use with Spring Boot Thymeleaf instead of React:
    <div th:replace="~{fragments/header :: header}"></div>
    <div th:replace="~{fragments/floating-btn :: floatingAddBtn}"></div>
 */
+/* ===== USER / LOGOUT ===== */
+.nav-user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: auto;
+    padding-left: 16px;
+}
+.nav-user-name {
+    color: var(--nav-text);
+    font-size: 13px;
+    font-weight: 600;
+}
+.nav-logout {
+    background: rgba(255, 255, 255, 0.18);
+    color: var(--nav-text);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 3px;
+    padding: 5px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+.nav-logout:hover {
+    background: rgba(255, 255, 255, 0.3);
+}

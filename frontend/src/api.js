@@ -1,8 +1,18 @@
+import { getToken, logout } from './auth.js';
+
 async function request(path, options = {}) {
+  const token = getToken();
+  const headers = { 'Content-Type': 'application/json', ...(options.headers || {}) };
+  if (token) headers['Authorization'] = `Bearer ${token}`;
   const res = await fetch(`/api${path}`, {
-    headers: { 'Content-Type': 'application/json' },
+    headers,
     ...options,
   });
+  if (res.status === 401) {
+    logout();
+    const err = new Error('Session expired. Please sign in again.');
+    throw err;
+  }
   if (!res.ok) {
     let body = {};
     try { body = await res.json(); } catch { /* no body */ }
@@ -21,6 +31,22 @@ const qs = (params) => {
 };
 
 export const api = {
+  login: async (username, password) => {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
+    if (!res.ok) {
+      let body = {};
+      try { body = await res.json(); } catch { /* no body */ }
+      throw new Error(body.message || `Login failed (${res.status})`);
+    }
+    return res.json();
+  },
+  logout: () => request('/auth/logout', { method: 'POST' }),
+  forgotPassword: (username) => request('/auth/forgot-password', { method: 'POST', body: JSON.stringify({ username }) }),
+  resetPassword: (token, newPassword) => request('/auth/reset-password', { method: 'POST', body: JSON.stringify({ token, newPassword }) }),
   lookups: () => request('/masters/lookups'),
   buyers: () => request('/masters/buyers'),
   qualities: () => request('/masters/qualities'),

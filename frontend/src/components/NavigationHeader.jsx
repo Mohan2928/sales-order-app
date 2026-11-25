@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
+import { getUser, logout } from '../auth.js';
 import './NavigationHeader.css';
 
 const NavigationHeader = () => {
@@ -155,6 +156,10 @@ const NavigationHeader = () => {
                 ))}
               </ul>
             </nav>
+            <div className="nav-user">
+              <span className="nav-user-name">{getUser()}</span>
+              <button type="button" className="nav-logout" onClick={logout}>Logout</button>
+            </div>
           </div>
         </div>
       </header>

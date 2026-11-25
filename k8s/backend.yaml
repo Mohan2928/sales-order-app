@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: salesorder-backend:v5
+          image: salesorder-backend:v7
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8085
