@@ -51,26 +51,35 @@
 }
 
 .login-card .field {
-  grid-template-columns: 90px 1fr;
-  margin-bottom: 12px;
+  grid-template-columns: 120px 1fr;
+  margin-bottom: 18px;
+}
+.login-card .field .label {
+  font-size: 14px;
+  padding-top: 9px;
+}
+.login-card .field input {
+  height: 40px;
+  font-size: 14px;
 }
 
 .login-actions {
   display: flex;
   justify-content: flex-end;
-  margin-top: 18px;
+  margin-top: 24px;
 }
 
 .login-actions .btn {
-  min-width: 120px;
-  height: 32px;
+  min-width: 150px;
+  height: 42px;
+  font-size: 14px;
 }
 
 .login-alert {
-  font-size: 12px;
-  padding: 8px 10px;
+  font-size: 13px;
+  padding: 10px 12px;
   border-radius: 3px;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   line-height: 1.4;
 }
 .login-alert.error {
@@ -97,10 +106,10 @@
   background: none;
   border: 0;
   color: var(--blue-dark);
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  padding: 4px 2px;
+  padding: 6px 2px;
 }
 .login-link:hover {
   color: var(--blue);
