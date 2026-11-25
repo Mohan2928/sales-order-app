@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -30,11 +31,12 @@ public class DataSeeder {
     @Bean
     CommandLineRunner seed(LookupRepository lookups, BuyerRepository buyers, QualityRepository qualities,
                            PurchaseOrderRepository purchaseOrders, VendorRepository vendors,
-                           SalesOrderRepository salesOrders) {
+                           SalesOrderRepository salesOrders, UserRepository users, PasswordEncoder encoder) {
         return args -> {
             if ("never".equalsIgnoreCase(seedMode)) {
                 return;
             }
+            ensureAdmin(users, encoder);
             seedMasters(lookups, buyers, qualities);
             ensureLookupCategories(lookups);
             ensureVendors(vendors);
@@ -46,6 +48,17 @@ public class DataSeeder {
                 Runtime.getRuntime().halt(0);
             }
         };
+    }
+
+    private void ensureAdmin(UserRepository users, PasswordEncoder encoder) {
+        if (!users.existsByUsername("admin")) {
+            User u = new User();
+            u.setUsername("admin");
+            u.setPasswordHash(encoder.encode("admin123"));
+            u.setRole("ADMIN");
+            u.setEnabled(true);
+            users.save(u);
+        }
     }
 
     private void seedMasters(LookupRepository lookups, BuyerRepository buyers, QualityRepository qualities) {

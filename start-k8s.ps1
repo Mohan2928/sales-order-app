@@ -6,8 +6,8 @@ $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
 Write-Host "==> Building images..." -ForegroundColor Cyan
-docker build -t salesorder-backend:v2 ./backend
-docker build -t salesorder-frontend:v7 ./frontend
+docker build -t salesorder-backend:v3 ./backend
+docker build -t salesorder-frontend:v8 ./frontend
 
 Write-Host "==> Applying Kubernetes manifests..." -ForegroundColor Cyan
 kubectl apply -f k8s/namespace.yaml

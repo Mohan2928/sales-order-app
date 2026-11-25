@@ -13,7 +13,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: seed
-          image: salesorder-backend:v2
+          image: salesorder-backend:v3
           imagePullPolicy: IfNotPresent
           env:
             - name: APP_SEED_MODE
