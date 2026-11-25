@@ -30,8 +30,12 @@
 .nav-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
     height: 60px;
+}
+
+.nav-header > nav {
+    margin-left: auto;
 }
 
 .brand {
@@ -271,7 +275,7 @@ To use with Spring Boot Thymeleaf instead of React:
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-left: auto;
+    margin-left: 0;
     padding-left: 16px;
 }
 .nav-user-name {
