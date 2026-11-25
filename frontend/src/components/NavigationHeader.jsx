@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
-import { getUser, logout } from '../auth.js';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { clearSession, logout } from '../auth.js';
 import { api } from '../api.js';
 import './NavigationHeader.css';
 
 const NavigationHeader = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [mobileOpen, setMobileOpen] = useState(null);
+
+  const handleForgot = () => {
+    api.logout().catch(() => {});
+    clearSession();
+    navigate('/login', { state: { forgot: true } });
+  };
 
   const menuItems = [
     {
@@ -158,7 +165,7 @@ const NavigationHeader = () => {
               </ul>
             </nav>
             <div className="nav-user">
-              <span className="nav-user-name">{getUser()}</span>
+              <button type="button" className="nav-forgot" onClick={handleForgot}>Forgot Password</button>
               <button type="button" className="nav-logout" onClick={() => { api.logout().catch(() => {}); logout(); }}>
                 <svg className="nav-logout-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4" />

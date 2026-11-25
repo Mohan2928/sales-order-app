@@ -283,6 +283,20 @@ To use with Spring Boot Thymeleaf instead of React:
     font-size: 13px;
     font-weight: 600;
 }
+.nav-forgot {
+    background: none;
+    border: 0;
+    color: var(--nav-text);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 5px 4px;
+    text-decoration: underline;
+}
+.nav-forgot:hover {
+    text-decoration: none;
+    opacity: .85;
+}
 .nav-logout {
     background: rgba(255, 255, 255, 0.18);
     color: var(--nav-text);

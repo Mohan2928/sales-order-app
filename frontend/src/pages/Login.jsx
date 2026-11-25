@@ -7,7 +7,7 @@ import './Login.css';
 export default function Login() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [mode, setMode] = useState('login');
+  const [mode, setMode] = useState(location.state?.forgot ? 'forgot' : 'login');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
