@@ -78,21 +78,28 @@
 }
 
 .login-links {
-  margin-top: 12px;
-  text-align: right;
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .login-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   background: none;
   border: 0;
   color: var(--blue-dark);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
-  padding: 0;
-  text-decoration: underline;
+  padding: 4px 2px;
 }
-
 .login-link:hover {
   color: var(--blue);
+  text-decoration: underline;
+}
+.login-link-icon {
+  width: 14px;
+  height: 14px;
 }
