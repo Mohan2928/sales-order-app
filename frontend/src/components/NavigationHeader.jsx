@@ -90,7 +90,7 @@ const NavigationHeader = () => {
       <header className="top-nav" role="navigation" aria-label="Main navigation">
         <div className="nav-container">
           <div className="nav-header">
-            <div className="brand">TexOrders ERP Pro v3 (yarn) - 2.0 LIVE</div>
+            <div className="brand">TexOrders</div>
             <nav>
               <ul className="nav-menu">
                 {menuItems.map((item, index) => (

@@ -7,7 +7,7 @@ Set-Location $PSScriptRoot
 
 Write-Host "==> Building images..." -ForegroundColor Cyan
 docker build -t salesorder-backend:v7 ./backend
-docker build -t salesorder-frontend:v11 ./frontend
+docker build -t salesorder-frontend:v12 ./frontend
 
 Write-Host "==> Applying Kubernetes manifests..." -ForegroundColor Cyan
 kubectl apply -f k8s/namespace.yaml
